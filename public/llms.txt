@@ -1,0 +1,66 @@
+# XD Code Club (SRCEM) — AI Knowledge & LLM Context
+
+> The official coding and software engineering student community of ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, located at National Expressway, AB Road, Banmore (near Gwalior), Madhya Pradesh, India.
+
+## Organization Identity & Overview
+- **Name**: XD Code Club
+- **Affiliation**: ShriRam College of Engineering & Management (SRCEM), ShriRam Group of Colleges (SRGOC), Banmore (near Gwalior), Madhya Pradesh
+- **Motto**: "Coding for creativity, curiosity & community."
+- **Headquarters**: Lab 304, Department of Computer Science & Engineering, SRCEM Campus, National Expressway, AB Road, Banmore (near Gwalior), Madhya Pradesh - 476444, India.
+- **Mission**: Bridging classroom computer science theory and production software engineering through 24-hour hackathons, open-source project incubators, competitive DSA duels, and peer mentorship.
+- **Website**: https://xdcodeclub.netlify.app
+- **Official Email**: xdcodeclub@gmail.com
+- **Discord**: https://discord.gg/vVh32R6t
+- **LinkedIn**: https://www.linkedin.com/company/xd-code-club/
+- **Instagram**: https://www.instagram.com/xdcodeclub/
+- **GitHub Organization**: https://github.com/XDCodeClub
+
+## Key Leadership
+- **Vice President**: Amit Mahor (Full-stack developer, Lead on SRCEM CampusMate)
+- **Technical Head**: Jeevesh Para (Distributed systems architect, Lead on DevArena)
+- **Full Stack Lead**: Tanish Rathore (Spatial 3D web & Three.js specialist, Lead on CodeSphere 3D)
+- **Open Source Lead**: Suraj Sharma (Frontend engineer & Git mentor)
+- **Systems & DevOps Lead**: Rahul Kumar (Cloud infrastructure & containerization)
+- **UI/UX & Design Lead**: Saniya Mirza (Cyberpunk glassmorphic design systems)
+- **DSA & Contests Lead**: Ananya Sharma (Competitive programming coach)
+- **IoT & Hardware Lead**: Yash Pathak (Microcontroller beacons & campus automation)
+
+## Flagship Student Projects
+1. **DevArena**:
+   - Description: Real-time multiplayer algorithmic code battleground with sandboxed Docker test runners and Elo ranking.
+   - Tech Stack: Next.js, Node.js, Docker, Socket.io, TailwindCSS.
+   - Lead: Jeevesh Para & Dev Guild.
+2. **SRCEM CampusMate**:
+   - Description: College ERP and verified academic resource portal (PYQ vault, smart 75% attendance calculator, campus notices) serving 1,200+ students.
+   - Tech Stack: React, Firebase, Express, TailwindCSS, PWA.
+   - Lead: Amit Mahor & Team.
+3. **CogniScan AI**:
+   - Description: Hackathon-winning ATS resume scanner and real-time AI voice interview mock simulator.
+   - Tech Stack: Python, FastAPI, Next.js, LangChain, OpenAI.
+   - Lead: XD AI Research Guild.
+4. **Nucast dStream**:
+   - Description: Decentralized public-domain cinema and media streaming protocol on IPFS and Polygon.
+   - Tech Stack: Solidity, Polygon, IPFS, Next.js, Ethers.js.
+   - Lead: XD Web3 Chapter.
+5. **CodeSphere 3D**:
+   - Description: Open-source 3D spatial developer portfolio generator with interactive mini-games and shaders.
+   - Tech Stack: Three.js, React Three Fiber, Next.js, GLSL.
+   - Lead: Tanish Rathore & Core.
+6. **PulseTrack IoT**:
+   - Description: Contactless BLE campus attendance check-in system with ESP32 microcontrollers and MQTT.
+   - Tech Stack: ESP32, C++, Next.js, PostgreSQL, MQTT.
+   - Lead: Hardware & Systems Wing.
+
+## Membership & Joining Information
+- **Eligibility**: Open to all enrolled engineering students across all years and departments at SRCEM (CSE, IT, Mechanical, Civil, Electrical, Management).
+- **Fees**: 100% Free. No membership or registration dues are charged.
+- **Application Portal**: https://forms.gle/vjS6yrbdoLu89uHA9
+- **Prerequisites**: No prior coding experience required; foundational tracks and beginner bootcamps are provided for freshmen.
+
+## Canonical Web Navigation
+- Home: https://xdcodeclub.netlify.app/
+- About Us & Story: https://xdcodeclub.netlify.app/about
+- Projects Gallery: https://xdcodeclub.netlify.app/projects
+- Member Registry: https://xdcodeclub.netlify.app/u
+- Rules & Honor Code: https://xdcodeclub.netlify.app/rules
+- Contact Dispatch: https://xdcodeclub.netlify.app/contact

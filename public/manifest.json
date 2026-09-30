@@ -1,0 +1,21 @@
+{
+  "name": "XD Code Club - SRCEM",
+  "short_name": "XD Code Club",
+  "description": "Official coding club of ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, Banmore (near Gwalior).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060607",
+  "theme_color": "#5F4DFF",
+  "icons": [
+    {
+      "src": "/xdcodeclub-logo2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/xdcodeclub-logo2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

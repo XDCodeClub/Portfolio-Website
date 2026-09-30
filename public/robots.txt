@@ -1,0 +1,33 @@
+# Robots.txt for XD Code Club, SRCEM
+# Allow all standard search engines and AI search crawlers
+
+User-agent: *
+Allow: /
+
+# Explicit rules for AI Search Engines & LLM Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemaps
+Sitemap: https://xdcodeclub.netlify.app/sitemap.xml
