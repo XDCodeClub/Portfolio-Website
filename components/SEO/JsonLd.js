@@ -1,56 +1,59 @@
 import React from "react";
 import Head from "next/head";
+import siteContent from "../../data/siteContent";
 
 export function GlobalJsonLd() {
+  const { club, socialLinks } = siteContent;
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "EducationalOrganization",
-        "@id": "https://xdcodeclub.netlify.app/#organization",
-        "name": "XD Code Club",
+        "@id": `${club.websiteUrl}/#organization`,
+        "name": club.name,
         "alternateName": [
-          "XD Code Club SRCEM",
+          `${club.name} ${club.collegeShort}`,
+          `${club.name} SRCEM`,
           "XD Coding Club",
           "ShriRam College Coding Club",
-          "SRGOC Coding Club"
+          "SRGOC Coding Club",
         ],
-        "url": "https://xdcodeclub.netlify.app",
+        "url": club.websiteUrl,
         "logo": {
           "@type": "ImageObject",
-          "url": "https://xdcodeclub.netlify.app/xdcodeclub-logo2.png",
+          "url": `${club.websiteUrl}${club.logo}`,
           "width": 512,
-          "height": 512
+          "height": 512,
         },
-        "description":
-          "Official student software engineering and coding community of ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, Banmore (near Gwalior), Madhya Pradesh.",
+        "description": club.affiliation,
         "parentOrganization": {
           "@type": "CollegeOrUniversity",
-          "name": "ShriRam College of Engineering & Management",
-          "alternateName": "SRCEM (ShriRam Group of Colleges)",
+          "name": club.college,
+          "alternateName": `${club.collegeShort} (${club.group})`,
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "National Expressway, AB Road",
-            "addressLocality": "Banmore (near Gwalior)",
-            "addressRegion": "Madhya Pradesh",
-            "postalCode": "476444",
-            "addressCountry": "IN"
-          }
+            "streetAddress": club.address.street,
+            "addressLocality": club.address.locality,
+            "addressRegion": club.address.region,
+            "postalCode": club.address.postalCode,
+            "addressCountry": club.address.countryCode,
+          },
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Lab 304, Computer Science Department, SRCEM Campus, National Expressway, AB Road",
-          "addressLocality": "Banmore (near Gwalior)",
-          "addressRegion": "Madhya Pradesh",
-          "postalCode": "476444",
-          "addressCountry": "IN"
+          "streetAddress": `${club.headquarters}`,
+          "addressLocality": club.address.locality,
+          "addressRegion": club.address.region,
+          "postalCode": club.address.postalCode,
+          "addressCountry": club.address.countryCode,
         },
         "sameAs": [
-          "https://www.linkedin.com/company/xd-code-club/",
-          "https://discord.gg/vVh32R6t",
-          "https://www.instagram.com/xdcodeclub/",
-          "https://github.com/XDCodeClub"
-        ],
+          socialLinks.linkedin,
+          socialLinks.discord,
+          socialLinks.instagram,
+          socialLinks.github,
+        ].filter(Boolean),
         "knowsAbout": [
           "Computer Science",
           "Software Engineering",
@@ -60,20 +63,20 @@ export function GlobalJsonLd() {
           "Open Source Software",
           "Web3 and Blockchain",
           "IoT and Embedded Systems",
-          "Hackathons"
-        ]
+          "Hackathons",
+        ],
       },
       {
         "@type": "WebSite",
-        "@id": "https://xdcodeclub.netlify.app/#website",
-        "url": "https://xdcodeclub.netlify.app",
-        "name": "XD Code Club | Official Coding Club - SRCEM",
-        "description": "Coding for creativity, curiosity & community.",
+        "@id": `${club.websiteUrl}/#website`,
+        "url": club.websiteUrl,
+        "name": `${club.name} | ${club.badgeText}`,
+        "description": club.motto,
         "publisher": {
-          "@id": "https://xdcodeclub.netlify.app/#organization"
-        }
-      }
-    ]
+          "@id": `${club.websiteUrl}/#organization`,
+        },
+      },
+    ],
   };
 
   return (
@@ -90,14 +93,14 @@ export function FaqJsonLd({ faqs }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((f) => ({
+    "mainEntity": (faqs || []).map((f) => ({
       "@type": "Question",
       "name": f.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": f.answer
-      }
-    }))
+        "text": f.answer,
+      },
+    })),
   };
 
   return (
@@ -114,7 +117,7 @@ export function ProjectsJsonLd({ projects }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": projects.map((p, index) => ({
+    "itemListElement": (projects || []).map((p, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "item": {
@@ -125,15 +128,15 @@ export function ProjectsJsonLd({ projects }) {
         "description": p.description,
         "author": {
           "@type": "Person",
-          "name": p.contributors
+          "name": p.contributors,
         },
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
-        }
-      }
-    }))
+          "priceCurrency": "USD",
+        },
+      },
+    })),
   };
 
   return (
@@ -148,6 +151,7 @@ export function ProjectsJsonLd({ projects }) {
 
 export function MemberJsonLd({ member }) {
   if (!member) return null;
+  const { club } = siteContent;
 
   const schema = {
     "@context": "https://schema.org",
@@ -159,15 +163,15 @@ export function MemberJsonLd({ member }) {
       "description": member.bio,
       "affiliation": {
         "@type": "EducationalOrganization",
-        "name": "XD Code Club, ShriRam College of Engineering & Management (ShriRam Group of Colleges)"
+        "name": `${club.name}, ${club.college} (${club.group})`,
       },
       "knowsAbout": member.skills,
       "sameAs": [
         member.links?.github,
         member.links?.linkedin,
-        member.links?.linktree
-      ].filter(Boolean)
-    }
+        member.links?.linktree,
+      ].filter(Boolean),
+    },
   };
 
   return (

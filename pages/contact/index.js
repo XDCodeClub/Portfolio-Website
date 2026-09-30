@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import siteContent from "../../data/siteContent";
 
 export default function Contact() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,10 +14,12 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const { club, forms, contact, footer } = siteContent;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate interactive send
+    // Interactive dispatch simulation
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -32,25 +35,16 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>Contact | XD Code Club - SRCEM</title>
-        <meta
-          name="description"
-          content="Connect with XD Code Club, SRCEM for collaborations, queries, sponsorships, and technical workshops. Reach us via WhatsApp, email, LinkedIn, or Discord."
-        />
-        <meta property="og:title" content="Contact | XD Code Club - SRCEM" />
-        <meta
-          property="og:description"
-          content="Get in touch with student tech leadership at ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, Banmore (near Gwalior)."
-        />
-        <link rel="canonical" href="https://xdcodeclub.netlify.app/contact" />
-        <meta property="og:url" content="https://xdcodeclub.netlify.app/contact" />
-        <meta property="og:image" content="/xdcodeclub-logo2.png" />
-        <meta name="twitter:title" content="Contact | XD Code Club - SRCEM" />
-        <meta
-          name="twitter:description"
-          content="Send a dispatch, join our Discord, or visit Lab 304 at SRCEM."
-        />
-        <meta name="twitter:image" content="/xdcodeclub-logo2.png" />
+        <title>{contact.meta.title}</title>
+        <meta name="description" content={contact.meta.description} />
+        <meta property="og:title" content={contact.meta.title} />
+        <meta property="og:description" content={contact.meta.ogDescription} />
+        <link rel="canonical" href={`${club.websiteUrl}/contact`} />
+        <meta property="og:url" content={`${club.websiteUrl}/contact`} />
+        <meta property="og:image" content={club.logo} />
+        <meta name="twitter:title" content={contact.meta.title} />
+        <meta name="twitter:description" content={contact.meta.description} />
+        <meta name="twitter:image" content={club.logo} />
       </Head>
 
       <main className="min-h-screen bg-[#060607] relative overflow-hidden">
@@ -69,8 +63,8 @@ export default function Contact() {
                   <a>
                     <img
                       className="cursor-pointer h-14 md:h-16 hover:animate-pulse hover:rotate-[-360deg] transition-all ease-in-out"
-                      src="/xdcodeclub-logo2.png"
-                      alt="XD Code Club Logo"
+                      src={club.logo}
+                      alt={club.logoAlt}
                     />
                   </a>
                 </Link>
@@ -93,6 +87,11 @@ export default function Contact() {
                     Projects
                   </h1>
                 </Link>
+                <Link href={"/u"}>
+                  <h1 className="ripple cursor-pointer text-sm sm:text-base px-2 py-2 rounded-md transition-colors hover:text-black">
+                    Members
+                  </h1>
+                </Link>
                 <Link href={"/rules"}>
                   <h1 className="ripple cursor-pointer text-sm sm:text-base px-2 py-2 rounded-md transition-colors hover:text-black">
                     Rules
@@ -105,7 +104,7 @@ export default function Contact() {
                 </Link>
 
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-8 sm:px-10 py-2 monu text-sm shadow-lg shadow-purple-600/30"
@@ -117,7 +116,7 @@ export default function Contact() {
               {/* Mobile Hamburger Toggle */}
               <div className="flex items-center gap-3 md:hidden">
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-primary btn-gradient px-4 py-1.5 text-xs monu rounded-lg shadow-md"
@@ -154,6 +153,9 @@ export default function Contact() {
                 <Link href="/projects">
                   <a className="px-3 py-2 rounded-lg hover:bg-white/10">Projects</a>
                 </Link>
+                <Link href="/u">
+                  <a className="px-3 py-2 rounded-lg hover:bg-white/10">Members</a>
+                </Link>
                 <Link href="/rules">
                   <a className="px-3 py-2 rounded-lg hover:bg-white/10">Rules</a>
                 </Link>
@@ -166,119 +168,108 @@ export default function Contact() {
         </div>
 
         {/* Hero Section */}
-        <section className="text-white comfort mx-5 sm:mx-10 md:mx-20 mt-12 mb-12">
+        <section className="text-white comfort mx-5 sm:mx-10 md:mx-20 mt-12 mb-14">
           <div className="flex flex-col items-start max-w-4xl">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full" />
               <span className="text-xs uppercase tracking-widest text-blue-400 font-bold comfort">
-                Let's Build Together
+                {contact.hero.eyebrow}
               </span>
             </div>
 
             <h1 className="monu text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] uppercase box-with-text leading-tight tracking-wider">
-              Contact Us
+              {contact.hero.title}
             </h1>
 
-            <p className="text-[#9ca0d2] text-base md:text-lg mt-3 max-w-2xl leading-relaxed">
-              Have a question about membership, hackathons, or tech mentorship? Want to sponsor our next
-              student sprint or collaborate on a software project? Reach out directly.
+            <p className="text-lg md:text-xl text-[#9ca0d2] mt-3 max-w-2xl leading-relaxed">
+              {contact.hero.subtitle}
             </p>
           </div>
         </section>
 
-        {/* 3 Quick Action Cards */}
+        {/* 3 Quick Connect Channels */}
         <section className="mx-5 sm:mx-10 md:mx-20 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1: Discord */}
-            <a
-              href="https://discord.gg/vVh32R6t"
-              target="_blank"
-              rel="noreferrer"
-              className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-indigo-500/60 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <img
-                    className="h-6 w-6"
-                    src="https://img.icons8.com/ios-filled/50/FFFFFF/discord--v1.png"
-                    alt="Discord"
-                  />
-                </div>
-                <h3 className="monu text-lg text-white font-bold mb-1 flex items-center gap-2">
-                  <span>Discord Guild</span>
-                  <span className="text-xs text-indigo-400 font-mono font-normal">Active 🟢</span>
-                </h3>
-                <p className="text-[#9ca0d2] text-sm comfort">
-                  Join 250+ student coders in daily voice chats, code reviews, and project collaboration.
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-indigo-300 monu">
-                <span>Join Discord Channel</span>
-                <span>→</span>
-              </div>
-            </a>
+            {contact.channels.map((ch, idx) => {
+              const borderHover =
+                ch.color === "indigo"
+                  ? "hover:border-indigo-500/60"
+                  : ch.color === "blue"
+                  ? "hover:border-blue-500/60"
+                  : "hover:border-emerald-500/60";
 
-            {/* Card 2: LinkedIn */}
-            <a
-              href="https://www.linkedin.com/company/xd-code-club/"
-              target="_blank"
-              rel="noreferrer"
-              className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-blue-500/60 transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <img
-                    className="h-6 w-6"
-                    src="https://img.icons8.com/ios-filled/50/FFFFFF/linkedin--v1.png"
-                    alt="LinkedIn"
-                  />
-                </div>
-                <h3 className="monu text-lg text-white font-bold mb-1">LinkedIn Network</h3>
-                <p className="text-[#9ca0d2] text-sm comfort">
-                  Connect with student leaders, explore official announcements, and engage with alumni across MNCs.
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-blue-300 monu">
-                <span>Follow on LinkedIn</span>
-                <span>→</span>
-              </div>
-            </a>
+              const textAction =
+                ch.color === "indigo"
+                  ? "text-indigo-300"
+                  : ch.color === "blue"
+                  ? "text-blue-300"
+                  : "text-emerald-300";
 
-            {/* Card 3: Direct Reach (Email & WhatsApp) */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-500/60 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="monu text-lg text-white font-bold mb-1">Direct Inquiries</h3>
-                <p className="text-[#9ca0d2] text-sm comfort mb-4">
-                  Immediate assistance for official collaborations, event partnerships, and inquiries.
-                </p>
-                <div className="space-y-2 text-xs">
+              if (ch.href) {
+                return (
                   <a
-                    href="mailto:xdcodeclub@gmail.com"
-                    className="flex items-center gap-2 text-gray-200 hover:text-emerald-400 transition-colors comfort"
-                  >
-                    <span className="text-emerald-400 font-mono">✉️</span>
-                    <span>xdcodeclub@gmail.com</span>
-                  </a>
-                  <a
-                    href="https://wa.me/919876543210"
+                    key={idx}
+                    href={ch.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 text-gray-200 hover:text-emerald-400 transition-colors comfort"
+                    className={`p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 ${borderHover} transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between`}
                   >
-                    <span className="text-emerald-400 font-mono">💬</span>
-                    <span>WhatsApp: +91 9876543210</span>
+                    <div>
+                      <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <img className="h-6 w-6" src={ch.icon} alt={ch.title} />
+                      </div>
+                      <h3 className="monu text-lg text-white font-bold mb-1 flex items-center gap-2">
+                        <span>{ch.title}</span>
+                        <span className="text-xs text-indigo-400 font-mono font-normal">{ch.status}</span>
+                      </h3>
+                      <p className="text-[#9ca0d2] text-sm comfort">{ch.description}</p>
+                    </div>
+                    <div className={`mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs ${textAction} monu`}>
+                      <span>{ch.actionText}</span>
+                      <span>→</span>
+                    </div>
                   </a>
+                );
+              }
+
+              return (
+                <div
+                  key={idx}
+                  className={`p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 ${borderHover} transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between`}
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="monu text-lg text-white font-bold mb-1">{ch.title}</h3>
+                    <p className="text-[#9ca0d2] text-sm comfort mb-4">{ch.description}</p>
+                    <div className="space-y-2 text-xs">
+                      <a
+                        href={`mailto:${ch.email}`}
+                        className="flex items-center gap-2 text-gray-200 hover:text-emerald-400 transition-colors comfort"
+                      >
+                        <span className="text-emerald-400 font-mono">✉️</span>
+                        <span>{ch.email}</span>
+                      </a>
+                      <a
+                        href={ch.whatsappHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 text-gray-200 hover:text-emerald-400 transition-colors comfort"
+                      >
+                        <span className="text-emerald-400 font-mono">💬</span>
+                        <span>WhatsApp: {ch.phone}</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div className={`mt-5 pt-4 border-t border-white/10 text-xs ${textAction} font-mono`}>
+                    ⚡ Avg response time: {ch.status}
+                  </div>
                 </div>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 text-xs text-emerald-300 font-mono">
-                ⚡ Avg response time: &lt; 24h
-              </div>
-            </div>
+              );
+            })}
           </div>
         </section>
 
@@ -289,11 +280,11 @@ export default function Contact() {
             <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-xl shadow-2xl">
               <div className="mb-6">
                 <span className="text-xs uppercase tracking-widest text-blue-400 font-bold comfort">
-                  Instant Message
+                  {contact.form.eyebrow}
                 </span>
-                <h2 className="monu text-2xl text-white font-bold mt-1">Send Us a Dispatch</h2>
+                <h2 className="monu text-2xl text-white font-bold mt-1">{contact.form.title}</h2>
                 <p className="text-xs sm:text-sm text-[#9ca0d2] comfort mt-1">
-                  Fill in the details below and a club lead will get back to your inbox promptly.
+                  {contact.form.subtitle}
                 </p>
               </div>
 
@@ -302,15 +293,15 @@ export default function Contact() {
                   <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
                     ✓
                   </div>
-                  <h3 className="monu text-xl text-white font-bold mb-2">Message Dispatched!</h3>
+                  <h3 className="monu text-xl text-white font-bold mb-2">{contact.form.successTitle}</h3>
                   <p className="text-sm text-[#9ca0d2] max-w-md mx-auto mb-6">
-                    Thank you for reaching out. The XD Code Club leadership has received your inquiry and will follow up shortly.
+                    {contact.form.successMessage}
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
                     className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs monu transition-all"
                   >
-                    Send Another Dispatch
+                    {contact.form.resetButtonText}
                   </button>
                 </div>
               ) : (
@@ -350,37 +341,37 @@ export default function Contact() {
                   {/* Subject / Topic Dropdown */}
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-2 monu">
-                      Subject / Topic
+                      Topic / Inquiry Subject *
                     </label>
                     <select
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                      className="w-full bg-[#111219] text-white text-sm px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all comfort"
+                      className="w-full bg-[#111116] text-white text-sm px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all comfort cursor-pointer"
                     >
-                      <option value="General Query">General Query / Question</option>
-                      <option value="Club Membership">Joining XD Code Club</option>
-                      <option value="Project Collaboration">Project Collaboration & Mentorship</option>
-                      <option value="Hackathon Sponsorship">Hackathon Sponsorship & Partnership</option>
-                      <option value="Speaker / Workshop Session">Guest Speaker / Technical Workshop</option>
+                      {contact.form.subjects.map((sub, i) => (
+                        <option key={i} value={sub} className="bg-[#111116] text-white">
+                          {sub}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
-                  {/* Message Textarea */}
+                  {/* Message Body */}
                   <div>
                     <label className="block text-xs font-semibold text-gray-300 mb-2 monu">
-                      Message *
+                      Your Message *
                     </label>
                     <textarea
-                      rows={5}
                       required
-                      placeholder="Tell us what's on your mind, how you'd like to collaborate, or what you're working on..."
+                      rows={5}
+                      placeholder="Share details regarding your idea, collaboration proposal, or general query..."
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       className="w-full bg-white/[0.05] text-white placeholder-gray-500 text-sm p-4 rounded-xl border border-white/10 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all comfort resize-none"
                     />
                   </div>
 
-                  {/* Animated Submit Button */}
+                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -389,11 +380,11 @@ export default function Contact() {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Dispatching...</span>
+                        <span>{contact.form.submittingButtonText}</span>
                       </>
                     ) : (
                       <>
-                        <span>Send Message</span>
+                        <span>{contact.form.submitButtonText}</span>
                         <span>⚡</span>
                       </>
                     )}
@@ -404,7 +395,6 @@ export default function Contact() {
 
             {/* Campus Coordinates & Location Details (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              {/* Campus Coordinates Badge */}
               <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-md">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-xl bg-blue-500/20 text-blue-400">
@@ -415,41 +405,44 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="text-[11px] uppercase tracking-widest text-blue-400 font-mono font-bold">
-                      Campus Base
+                      {contact.coordinates.eyebrow}
                     </span>
-                    <h3 className="monu text-lg text-white font-bold">Headquarters</h3>
+                    <h3 className="monu text-lg text-white font-bold">{contact.coordinates.title}</h3>
                   </div>
                 </div>
 
                 <div className="space-y-3 text-sm comfort text-[#9ca0d2] leading-relaxed">
                   <p className="font-semibold text-white">
-                    ShriRam College of Engineering & Management (SRCEM)
+                    {contact.coordinates.college}
                     <span className="block text-xs text-purple-400 font-mono mt-0.5 font-normal">
-                      Part of ShriRam Group of Colleges (SRGOC)
+                      {contact.coordinates.group}
                     </span>
                   </p>
                   <p>
-                    Department of Computer Science & Engineering<br />
-                    National Expressway, A.B. Road<br />
-                    Banmore (near Gwalior), Madhya Pradesh – 476444, India
+                    {contact.coordinates.addressLines.map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
                   </p>
                   <div className="pt-2">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-mono border border-blue-500/20">
-                      📍 Lab 304, Computer Center
+                      {contact.coordinates.labPill}
                     </span>
                   </div>
                 </div>
 
                 {/* College Website Link */}
                 <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs text-gray-400 comfort">SRCEM Official Site:</span>
+                  <span className="text-xs text-gray-400 comfort">{contact.coordinates.collegeSiteLabel}</span>
                   <a
-                    href="http://srgoc.org/"
+                    href={contact.coordinates.collegeSiteUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs text-blue-400 hover:underline monu"
                   >
-                    srgoc.org ↗
+                    {contact.coordinates.collegeSiteDisplay}
                   </a>
                 </div>
               </div>
@@ -457,19 +450,17 @@ export default function Contact() {
               {/* Weekly Meetups Card */}
               <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
                 <h4 className="monu text-white text-sm mb-2 flex items-center gap-2">
-                  <span className="text-purple-400">⏱️</span> Weekly Code Sprints
+                  <span className="text-purple-400">⏱️</span> {contact.weeklyMeets.title}
                 </h4>
                 <p className="text-xs text-[#9ca0d2] comfort leading-relaxed mb-3">
-                  We host weekly physical coding meetups every Wednesday & Saturday at the SRCEM campus,
-                  along with Sunday evening Discord voice hack nights.
+                  {contact.weeklyMeets.description}
                 </p>
-                <div className="flex gap-2">
-                  <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/5 text-purple-300 border border-purple-500/20 font-mono">
-                    Wednesdays: 3:30 PM
-                  </span>
-                  <span className="text-[11px] px-2.5 py-1 rounded-md bg-white/5 text-purple-300 border border-purple-500/20 font-mono">
-                    Sundays: 8:00 PM (Online)
-                  </span>
+                <div className="flex flex-wrap gap-2">
+                  {contact.weeklyMeets.schedules.map((s, i) => (
+                    <span key={i} className="text-[11px] px-2.5 py-1 rounded-md bg-white/5 text-purple-300 border border-purple-500/20 font-mono">
+                      {s.label}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -482,56 +473,39 @@ export default function Contact() {
             <Link href="/">
               <a className="flex items-center mb-4 sm:mb-0">
                 <img
-                  src="/xdcodeclub-logo2.png"
+                  src={club.logo}
                   className="h-10 mr-3 cursor-pointer"
-                  alt="XD Logo"
+                  alt={club.logoAlt}
                 />
                 <span className="text-white font-extrabold monu text-xl">
-                  XD<span className="text-gray-400 font-extrabold monu"> Code Club, SRCEM</span>
+                  {footer.brandText}<span className="text-gray-400 font-extrabold monu">{footer.brandSubText}</span>
                 </span>
               </a>
             </Link>
             <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-300 sm:mb-0 comfort">
-              <li>
-                <a
-                  href="https://www.linkedin.com/company/xd-code-club/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://discord.gg/vVh32R6t"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  Discord
-                </a>
-              </li>
-              <li>
-                <Link href="/about">
-                  <a className="mr-4 hover:underline md:mr-6">About</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects">
-                  <a className="mr-4 hover:underline md:mr-6">Projects</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/rules">
-                  <a className="mr-4 hover:underline md:mr-6">Rules</a>
-                </Link>
-              </li>
+              {footer.links.map((link, idx) => (
+                <li key={idx}>
+                  {link.isExternal ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mr-4 hover:underline md:mr-6"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>
+                      <a className="mr-4 hover:underline md:mr-6">{link.label}</a>
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
           <hr className="my-6 border-gray-800 sm:mx-auto" />
           <span className="block text-sm text-gray-400 comfort sm:text-center">
-            © XD Code Club 2026, SRCEM. All Rights Reserved.
+            {footer.copyright}
           </span>
         </footer>
       </main>

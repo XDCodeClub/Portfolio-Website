@@ -1,7 +1,10 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import siteContent from "../data/siteContent";
 
 class MyDocument extends Document {
   render() {
+    const { club, socialLinks } = siteContent;
+
     return (
       <Html lang="en">
         <Head>
@@ -10,31 +13,31 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#060607" />
           
           {/* Favicons & Manifest */}
-          <link rel="icon" type="image/png" href="/xdcodeclub-logo2.png" />
-          <link rel="apple-touch-icon" href="/xdcodeclub-logo2.png" />
+          <link rel="icon" type="image/png" href={club.logo} />
+          <link rel="apple-touch-icon" href={club.logo} />
           <link rel="manifest" href="/manifest.json" />
 
           {/* Geo & Local Search Optimization (Banmore, near Gwalior, Madhya Pradesh, India) */}
           <meta name="geo.region" content="IN-MP" />
           <meta name="geo.placename" content="Banmore, Gwalior, Madhya Pradesh, India" />
-          <meta name="geo.position" content="26.3547;78.1189" />
-          <meta name="ICBM" content="26.3547, 78.1189" />
+          <meta name="geo.position" content={`${club.address.coordinates.latitude};${club.address.coordinates.longitude}`} />
+          <meta name="ICBM" content={`${club.address.coordinates.latitude}, ${club.address.coordinates.longitude}`} />
 
           {/* Author & Search Directives */}
-          <meta name="author" content="XD Code Club - SRCEM" />
+          <meta name="author" content={`${club.name} - ${club.collegeShort}`} />
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
           {/* Default Open Graph / Facebook */}
           <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="XD Code Club - SRCEM" />
-          <meta property="og:image" content="/xdcodeclub-logo2.png" />
+          <meta property="og:site_name" content={`${club.name} - ${club.collegeShort}`} />
+          <meta property="og:image" content={club.logo} />
           <meta property="og:image:width" content="512" />
           <meta property="og:image:height" content="512" />
-          <meta property="og:image:alt" content="XD Code Club SRCEM Logo" />
+          <meta property="og:image:alt" content={`${club.name} ${club.collegeShort} Logo`} />
 
           {/* Default Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="/xdcodeclub-logo2.png" />
+          <meta name="twitter:image" content={club.logo} />
           <meta name="twitter:site" content="@xdcodeclub" />
 
           {/* Global Structured Data JSON-LD for Search Engines & AI Overviews */}
@@ -44,45 +47,44 @@ class MyDocument extends Document {
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "EducationalOrganization",
-                "name": "XD Code Club",
+                "name": club.name,
                 "alternateName": [
-                  "XD Code Club SRCEM",
+                  `${club.name} ${club.collegeShort}`,
                   "XD Coding Club",
                   "ShriRam College Coding Club",
-                  "SRGOC Coding Club"
+                  "SRGOC Coding Club",
                 ],
-                "url": "https://xdcodeclub.netlify.app",
-                "logo": "https://xdcodeclub.netlify.app/xdcodeclub-logo2.png",
-                "description":
-                  "Official student coding and software engineering community of ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, located at National Expressway, AB Road, Banmore (near Gwalior), Madhya Pradesh.",
+                "url": club.websiteUrl,
+                "logo": `${club.websiteUrl}${club.logo}`,
+                "description": club.affiliation,
                 "parentOrganization": {
                   "@type": "CollegeOrUniversity",
-                  "name": "ShriRam College of Engineering & Management",
-                  "alternateName": "SRCEM (ShriRam Group of Colleges)",
+                  "name": club.college,
+                  "alternateName": `${club.collegeShort} (${club.group})`,
                   "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "National Expressway, AB Road",
-                    "addressLocality": "Banmore (near Gwalior)",
-                    "addressRegion": "Madhya Pradesh",
-                    "postalCode": "476444",
-                    "addressCountry": "IN"
-                  }
+                    "streetAddress": club.address.street,
+                    "addressLocality": club.address.locality,
+                    "addressRegion": club.address.region,
+                    "postalCode": club.address.postalCode,
+                    "addressCountry": club.address.countryCode,
+                  },
                 },
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "Lab 304, Computer Science Department, SRCEM Campus, National Expressway, AB Road",
-                  "addressLocality": "Banmore (near Gwalior)",
-                  "addressRegion": "Madhya Pradesh",
-                  "postalCode": "476444",
-                  "addressCountry": "IN"
+                  "streetAddress": club.headquarters,
+                  "addressLocality": club.address.locality,
+                  "addressRegion": club.address.region,
+                  "postalCode": club.address.postalCode,
+                  "addressCountry": club.address.countryCode,
                 },
                 "sameAs": [
-                  "https://www.linkedin.com/company/xd-code-club/",
-                  "https://discord.gg/vVh32R6t",
-                  "https://www.instagram.com/xdcodeclub/",
-                  "https://github.com/XDCodeClub"
-                ]
-              })
+                  socialLinks.linkedin,
+                  socialLinks.discord,
+                  socialLinks.instagram,
+                  socialLinks.github,
+                ].filter(Boolean),
+              }),
             }}
           />
 

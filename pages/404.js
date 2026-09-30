@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import siteContent from "../data/siteContent";
 
 export default function Custom404() {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const { club, forms, notFound, footer } = siteContent;
 
   const handleQuickReturn = () => {
     setIsRedirecting(true);
@@ -18,17 +21,11 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>404: Signal Lost | XD Code Club - SRCEM</title>
-        <meta
-          name="description"
-          content="The coordinates you requested do not exist in the XD Code Club node mesh. Return to headquarters."
-        />
-        <meta property="og:title" content="404: Signal Lost | XD Code Club - SRCEM" />
-        <meta
-          property="og:description"
-          content="Error 404: Route not found. Return to XD Code Club headquarters."
-        />
-        <meta property="og:image" content="/xdcodeclub-logo2.png" />
+        <title>{notFound.meta.title}</title>
+        <meta name="description" content={notFound.meta.description} />
+        <meta property="og:title" content={notFound.meta.title} />
+        <meta property="og:description" content={notFound.meta.description} />
+        <meta property="og:image" content={club.logo} />
       </Head>
 
       <main className="min-h-screen bg-[#060607] relative overflow-hidden flex flex-col justify-between">
@@ -47,8 +44,8 @@ export default function Custom404() {
                   <a>
                     <img
                       className="cursor-pointer h-14 md:h-16 hover:animate-pulse hover:rotate-[-360deg] transition-all ease-in-out"
-                      src="/xdcodeclub-logo2.png"
-                      alt="XD Code Club Logo"
+                      src={club.logo}
+                      alt={club.logoAlt}
                     />
                   </a>
                 </Link>
@@ -88,7 +85,7 @@ export default function Custom404() {
                 </Link>
 
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-8 sm:px-10 py-2 monu text-sm shadow-lg shadow-purple-600/30"
@@ -100,7 +97,7 @@ export default function Custom404() {
               {/* Mobile Hamburger Toggle */}
               <div className="flex items-center gap-3 md:hidden">
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-primary btn-gradient px-4 py-1.5 text-xs monu rounded-lg shadow-md"
@@ -114,7 +111,7 @@ export default function Custom404() {
                 >
                   {mobileMenuOpen ? (
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                   ) : (
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +154,7 @@ export default function Custom404() {
             {/* Holographic Error Pill */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono mb-6 shadow-[0_0_20px_rgba(244,63,94,0.2)]">
               <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-              <span>404: PACKET_ROUTED_TO_VOID</span>
+              <span>{notFound.eyebrow}</span>
             </div>
 
             {/* Large Glitch 404 Headline */}
@@ -166,11 +163,11 @@ export default function Custom404() {
             </h1>
 
             <h2 className="monu text-xl sm:text-2xl text-white font-bold mb-3">
-              Coordinates Lost in Cyber Void
+              {notFound.title}
             </h2>
 
             <p className="text-[#9ca0d2] text-sm sm:text-base leading-relaxed comfort max-w-lg mx-auto mb-8">
-              The route or document you requested does not exist on the SRCEM Lab 304 node mesh. Either the frequency was decommissioned or the path was mistyped.
+              {notFound.description}
             </p>
 
             {/* Cyber Terminal Diagnostic Log */}
@@ -188,7 +185,7 @@ export default function Custom404() {
                 &gt; Destination Host Unreachable: 404 Not Found
               </p>
               <p className="text-gray-400">
-                &gt; Primary Gateway: SRCEM Lab 304 (Online 4ms)
+                &gt; Primary Gateway: {club.collegeShort} {club.labName} (Online 4ms)
               </p>
               <p className="text-emerald-400">
                 &gt; Suggestion: Re-route packet to root node /
@@ -212,7 +209,7 @@ export default function Custom404() {
                   </>
                 ) : (
                   <>
-                    <span>← Return to Headquarters</span>
+                    <span>← {notFound.returnButtonText}</span>
                   </>
                 )}
               </button>
@@ -252,61 +249,39 @@ export default function Custom404() {
             <Link href="/">
               <a className="flex items-center mb-4 sm:mb-0">
                 <img
-                  src="/xdcodeclub-logo2.png"
+                  src={club.logo}
                   className="h-10 mr-3 cursor-pointer"
-                  alt="XD Logo"
+                  alt={club.logoAlt}
                 />
                 <span className="text-white font-extrabold monu text-xl">
-                  XD<span className="text-gray-400 font-extrabold monu"> Code Club, SRCEM</span>
+                  {footer.brandText}<span className="text-gray-400 font-extrabold monu">{footer.brandSubText}</span>
                 </span>
               </a>
             </Link>
             <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-300 sm:mb-0 comfort">
-              <li>
-                <a
-                  href="https://www.linkedin.com/company/xd-code-club/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://discord.gg/vVh32R6t"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  Discord
-                </a>
-              </li>
-              <li>
-                <Link href="/about">
-                  <a className="mr-4 hover:underline md:mr-6">About</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects">
-                  <a className="mr-4 hover:underline md:mr-6">Projects</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/u">
-                  <a className="mr-4 hover:underline md:mr-6">Members</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <a className="hover:underline">Contact</a>
-                </Link>
-              </li>
+              {footer.links.map((link, idx) => (
+                <li key={idx}>
+                  {link.isExternal ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mr-4 hover:underline md:mr-6"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>
+                      <a className="mr-4 hover:underline md:mr-6">{link.label}</a>
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
           <hr className="my-6 border-gray-800 sm:mx-auto" />
           <span className="block text-sm text-gray-400 comfort sm:text-center">
-            © XD Code Club 2026, SRCEM. All Rights Reserved.
+            {footer.copyright}
           </span>
         </footer>
       </main>

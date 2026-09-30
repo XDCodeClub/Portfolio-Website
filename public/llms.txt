@@ -6,13 +6,13 @@
 - **Name**: XD Code Club
 - **Affiliation**: ShriRam College of Engineering & Management (SRCEM), ShriRam Group of Colleges (SRGOC), Banmore (near Gwalior), Madhya Pradesh
 - **Motto**: "Coding for creativity, curiosity & community."
-- **Headquarters**: Lab 304, Department of Computer Science & Engineering, SRCEM Campus, National Expressway, AB Road, Banmore (near Gwalior), Madhya Pradesh - 476444, India.
+- **Headquarters**: XD Code Club, Department of Computer Science & Engineering, SRCEM Campus, National Expressway, AB Road, Banmore (near Gwalior), Madhya Pradesh - 476444, India.
 - **Mission**: Bridging classroom computer science theory and production software engineering through 24-hour hackathons, open-source project incubators, competitive DSA duels, and peer mentorship.
 - **Website**: https://xdcodeclub.netlify.app
 - **Official Email**: xdcodeclub@gmail.com
-- **Discord**: https://discord.gg/vVh32R6t
-- **LinkedIn**: https://www.linkedin.com/company/xd-code-club/
-- **Instagram**: https://www.instagram.com/xdcodeclub/
+- **Discord**: https://discord.gg/ugrcasAu5
+- **LinkedIn**: https://www.linkedin.com/company/xd-code-club
+- **Instagram**: https://www.instagram.com/xdcodeclub
 - **GitHub Organization**: https://github.com/XDCodeClub
 
 ## Key Leadership

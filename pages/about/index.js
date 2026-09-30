@@ -2,80 +2,29 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { FaqJsonLd } from "../../components/SEO/JsonLd";
-
-const FAQS = [
-  {
-    id: "experience",
-    question: "Do I need prior coding or DSA experience before joining?",
-    answer:
-      "Not at all! XD Code Club welcomes students at every stage of their technical journey. Whether you are a total beginner writing your first 'Hello World' in C or Python, or an experienced full-stack developer, our senior mentors guide you through foundational tracks, logic building, and hands-on beginner sprint workshops.",
-    category: "Membership",
-  },
-  {
-    id: "free",
-    question: "Is membership free for all SRCEM engineering students?",
-    answer:
-      "Yes, 100% free. XD Code Club is a student-run technical community under ShriRam College of Engineering & Management (SRCEM), part of ShriRam Group of Colleges, Banmore (near Gwalior). We do not charge any membership fees or registration dues. All workshop sessions, hackathons, and mentorship initiatives are fully accessible to enrolled students.",
-    category: "Access",
-  },
-  {
-    id: "hackathons",
-    question: "How are teams formed for Smart India Hackathon (SIH) and external hackathons?",
-    answer:
-      "We run internal 'Team Matchmaking & Ideation Mixers' prior to major hackathons. Senior council members review project problem statements, evaluate individual skill strengths (frontend, backend, AI/ML, pitch presentation), and form balanced cross-functional teams with assigned mentor guidance.",
-    category: "Hackathons",
-  },
-  {
-    id: "perks",
-    question: "What hardware, cloud credits, or lab perks do members receive?",
-    answer:
-      "Active members get prioritized access to SRCEM Lab 304, high-speed campus fiber connectivity, IoT development boards (ESP32, Arduino kits, sensor modules), project incubation server compute, and official club swag goodies (die-cut dev stickers, member badges, and club t-shirts).",
-    category: "Perks & Lab",
-  },
-  {
-    id: "branches",
-    question: "Can non-CSE / non-IT branch students join?",
-    answer:
-      "Absolutely! We believe some of the most innovative software emerges from interdisciplinary collaboration. Students from Mechanical, Civil, Electrical, and Management branches are actively coding with us—contributing to hardware automation, product design, and software systems.",
-    category: "Inclusivity",
-  },
-  {
-    id: "incubator",
-    question: "How do I pitch my project idea to the XD Incubator?",
-    answer:
-      "Any member can submit a 1-page design proposal or prototype via our Discord #project-incubator channel or directly talk with Technical Head Jeevesh Para or VP Amit Mahor in Lab 304. Selected projects receive dedicated peer contributors, cloud infrastructure, and showcase slots on our official website.",
-    category: "Incubator",
-  },
-];
+import siteContent from "../../data/siteContent";
 
 export default function About() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState("experience");
 
+  const { club, forms, about, footer } = siteContent;
+
   return (
     <>
       <Head>
-        <title>About Us | XD Code Club - SRCEM</title>
-        <meta
-          name="description"
-          content="Learn about XD Code Club, SRCEM—our story, core pillars, milestones, and how we empower student developers to build production software."
-        />
-        <meta property="og:title" content="About Us | XD Code Club - SRCEM" />
-        <meta
-          property="og:description"
-          content="Discover how XD Code Club bridges classroom theory and real-world software engineering through hackathons, open source, and peer mentorship."
-        />
-        <link rel="canonical" href="https://xdcodeclub.netlify.app/about" />
-        <meta property="og:url" content="https://xdcodeclub.netlify.app/about" />
-        <meta property="og:image" content="/xdcodeclub-logo2.png" />
-        <meta name="twitter:title" content="About Us | XD Code Club - SRCEM" />
-        <meta
-          name="twitter:description"
-          content="Our story, core pillars, and milestones at ShriRam College of Engineering & Management (ShriRam Group of Colleges, Banmore near Gwalior)."
-        />
-        <meta name="twitter:image" content="/xdcodeclub-logo2.png" />
+        <title>{about.meta.title}</title>
+        <meta name="description" content={about.meta.description} />
+        <meta property="og:title" content={about.meta.title} />
+        <meta property="og:description" content={about.meta.ogDescription} />
+        <link rel="canonical" href={`${club.websiteUrl}/about`} />
+        <meta property="og:url" content={`${club.websiteUrl}/about`} />
+        <meta property="og:image" content={club.logo} />
+        <meta name="twitter:title" content={about.meta.title} />
+        <meta name="twitter:description" content={about.meta.description} />
+        <meta name="twitter:image" content={club.logo} />
       </Head>
-      <FaqJsonLd faqs={FAQS} />
+      <FaqJsonLd faqs={about.faqs} />
 
       <main className="min-h-screen bg-[#060607] relative overflow-hidden">
         {/* Subtle Ambient Background Gradients */}
@@ -93,8 +42,8 @@ export default function About() {
                   <a>
                     <img
                       className="cursor-pointer h-14 md:h-16 hover:animate-pulse hover:rotate-[-360deg] transition-all ease-in-out"
-                      src="/xdcodeclub-logo2.png"
-                      alt="XD Code Club Logo"
+                      src={club.logo}
+                      alt={club.logoAlt}
                     />
                   </a>
                 </Link>
@@ -117,6 +66,11 @@ export default function About() {
                     Projects
                   </h1>
                 </Link>
+                <Link href={"/u"}>
+                  <h1 className="ripple cursor-pointer text-sm sm:text-base px-2 py-2 rounded-md transition-colors hover:text-black">
+                    Members
+                  </h1>
+                </Link>
                 <Link href={"/rules"}>
                   <h1 className="ripple cursor-pointer text-sm sm:text-base px-2 py-2 rounded-md transition-colors hover:text-black">
                     Rules
@@ -129,7 +83,7 @@ export default function About() {
                 </Link>
 
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-8 sm:px-10 py-2 monu text-sm shadow-lg shadow-purple-600/30"
@@ -141,7 +95,7 @@ export default function About() {
               {/* Mobile Hamburger Toggle */}
               <div className="flex items-center gap-3 md:hidden">
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-primary btn-gradient px-4 py-1.5 text-xs monu rounded-lg shadow-md"
@@ -178,6 +132,9 @@ export default function About() {
                 <Link href="/projects">
                   <a className="px-3 py-2 rounded-lg hover:bg-white/10">Projects</a>
                 </Link>
+                <Link href="/u">
+                  <a className="px-3 py-2 rounded-lg hover:bg-white/10">Members</a>
+                </Link>
                 <Link href="/rules">
                   <a className="px-3 py-2 rounded-lg hover:bg-white/10">Rules</a>
                 </Link>
@@ -195,42 +152,30 @@ export default function About() {
             <div className="flex items-center gap-3 mb-3">
               <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full" />
               <span className="text-xs uppercase tracking-widest text-blue-400 font-bold comfort">
-                The Origin & Mission
+                {about.hero.eyebrow}
               </span>
             </div>
 
             <h1 className="monu text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] uppercase box-with-text leading-tight tracking-wider">
-              About Us
+              {about.hero.title}
             </h1>
 
             <p className="text-xl md:text-2xl text-white font-semibold mt-2 monu">
-              Building SRCEM’s most fearless <span className="text-[#9ca0d2]">developer guild</span>.
+              {about.hero.headline}
             </p>
 
             <p className="text-[#9ca0d2] text-base md:text-lg mt-4 max-w-3xl leading-relaxed">
-              XD Code Club was founded with a singular conviction: engineering should be defined by what you
-              build, not just the exams you write. Born at ShriRam College of Engineering & Management (SRCEM, ShriRam Group of Colleges, Banmore near Gwalior),
-              we are a tight-knit ecosystem of builders, mentors, designers, and innovators pushing each other to master modern technologies.
+              {about.hero.description}
             </p>
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 w-full max-w-3xl">
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <div className="monu text-2xl text-blue-400">300+</div>
-                <div className="text-xs text-gray-400 mt-1">Community Members</div>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <div className="monu text-2xl text-purple-400">15+</div>
-                <div className="text-xs text-gray-400 mt-1">Production Projects</div>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <div className="monu text-2xl text-emerald-400">4x</div>
-                <div className="text-xs text-gray-400 mt-1">National Hackathon Wins</div>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <div className="monu text-2xl text-amber-400">100%</div>
-                <div className="text-xs text-gray-400 mt-1">Peer Mentored</div>
-              </div>
+              {about.hero.stats.map((stat, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+                  <div className={`monu text-2xl ${stat.color}`}>{stat.value}</div>
+                  <div className="text-xs text-gray-400 mt-1">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -239,64 +184,41 @@ export default function About() {
         <section className="mx-5 sm:mx-10 md:mx-20 mb-20">
           <div className="mb-8">
             <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full mb-3" />
-            <h2 className="monu text-2xl sm:text-3xl text-white font-bold">What We Stand For</h2>
-            <p className="text-sm text-[#9ca0d2] mt-1 comfort">Our three foundational pillars that define every XD Coder.</p>
+            <h2 className="monu text-2xl sm:text-3xl text-white font-bold">{about.pillars.heading}</h2>
+            <p className="text-sm text-[#9ca0d2] mt-1 comfort">{about.pillars.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Pillar 1 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-5 text-blue-400">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-                <h3 className="monu text-lg text-white font-bold mb-2">Build in Public & Ship</h3>
-                <p className="text-[#9ca0d2] text-sm leading-relaxed comfort">
-                  We don’t believe in tutorial purgatory. Our members write code that runs in production—from college management ERPs and real-time coding arenas to smart IoT lab attendance systems.
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 text-xs text-blue-300 font-mono">
-                #ShipFast #ProductionReady
-              </div>
-            </div>
+            {about.pillars.items.map((pillar, idx) => {
+              const colorClasses =
+                pillar.color === "purple"
+                  ? { bg: "bg-purple-500/20", border: "border-purple-500/30", text: "text-purple-400", hoverBorder: "hover:border-purple-500/50" }
+                  : pillar.color === "emerald"
+                  ? { bg: "bg-emerald-500/20", border: "border-emerald-500/30", text: "text-emerald-400", hoverBorder: "hover:border-emerald-500/50" }
+                  : { bg: "bg-blue-500/20", border: "border-blue-500/30", text: "text-blue-400", hoverBorder: "hover:border-blue-500/50" };
 
-            {/* Pillar 2 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-5 text-purple-400">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+              return (
+                <div
+                  key={idx}
+                  className={`p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 ${colorClasses.hoverBorder} transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between`}
+                >
+                  <div>
+                    <div className={`w-12 h-12 rounded-xl ${colorClasses.bg} border ${colorClasses.border} flex items-center justify-center mb-5 ${colorClasses.text}`}>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                    </div>
+                    <h3 className="monu text-lg text-white font-bold mb-2">{pillar.title}</h3>
+                    <p className="text-[#9ca0d2] text-sm leading-relaxed comfort">
+                      {pillar.description}
+                    </p>
+                  </div>
+                  <div className={`mt-5 pt-4 border-t border-white/10 text-xs ${colorClasses.text} font-mono`}>
+                    {pillar.tag}
+                  </div>
                 </div>
-                <h3 className="monu text-lg text-white font-bold mb-2">Peer Mentorship</h3>
-                <p className="text-[#9ca0d2] text-sm leading-relaxed comfort">
-                  Juniors never struggle alone. Senior coders and alumni software developers guide members through DSA roadmap milestones, resume roasting, open-source pull requests, and mock technical interviews.
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 text-xs text-purple-300 font-mono">
-                #EachOneTeachOne #Mentorship
-              </div>
-            </div>
-
-            {/* Pillar 3 */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-5 text-emerald-400">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                </div>
-                <h3 className="monu text-lg text-white font-bold mb-2">Hackathon Culture</h3>
-                <p className="text-[#9ca0d2] text-sm leading-relaxed comfort">
-                  We thrive under 36-hour caffeine-fueled hackathons. Our squads represent SRCEM across national platforms, solving complex societal challenges and bringing home podium trophies and grants.
-                </p>
-              </div>
-              <div className="mt-5 pt-4 border-t border-white/10 text-xs text-emerald-300 font-mono">
-                #HackathonWinners #SpeedAndScale
-              </div>
-            </div>
+              );
+            })}
           </div>
         </section>
 
@@ -304,115 +226,67 @@ export default function About() {
         <section className="mx-5 sm:mx-10 md:mx-20 mb-24">
           <div className="mb-10">
             <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full mb-3" />
-            <h2 className="monu text-2xl sm:text-3xl text-white font-bold">Our Journey & Milestones</h2>
-            <p className="text-sm text-[#9ca0d2] mt-1 comfort">How XD Code Club evolved from an idea into SRCEM's flagship developer hub.</p>
+            <h2 className="monu text-2xl sm:text-3xl text-white font-bold">{about.journey.heading}</h2>
+            <p className="text-sm text-[#9ca0d2] mt-1 comfort">{about.journey.subtitle}</p>
           </div>
 
           <div className="relative border-l border-white/15 pl-6 sm:pl-10 space-y-12">
-            {/* Timeline Item 1 */}
-            <div className="relative group">
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#060607] group-hover:scale-125 transition-transform" />
-              <span className="text-xs font-mono font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/20">
-                2023 • FOUNDING PHASE
-              </span>
-              <h3 className="monu text-lg sm:text-xl text-white font-bold mt-2">The Seed at SRCEM</h3>
-              <p className="text-[#9ca0d2] text-sm leading-relaxed mt-1 max-w-2xl comfort">
-                Founded by passionate computer science undergraduates who wanted to break out of ordinary curricula and create a high-energy space where students build software together every single week.
-              </p>
-            </div>
+            {about.journey.milestones.map((item, idx) => {
+              const dotColor =
+                item.color === "purple"
+                  ? "bg-purple-500 text-purple-400 bg-purple-500/10 border-purple-500/20"
+                  : item.color === "emerald"
+                  ? "bg-emerald-500 text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
+                  : item.color === "amber"
+                  ? "bg-amber-500 text-amber-400 bg-amber-500/10 border-amber-500/20"
+                  : "bg-blue-500 text-blue-400 bg-blue-500/10 border-blue-500/20";
 
-            {/* Timeline Item 2 */}
-            <div className="relative group">
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-purple-500 border-4 border-[#060607] group-hover:scale-125 transition-transform" />
-              <span className="text-xs font-mono font-bold text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-md border border-purple-500/20">
-                2024 • RAPID GROWTH
-              </span>
-              <h3 className="monu text-lg sm:text-xl text-white font-bold mt-2">First Hackathon & 150+ Members</h3>
-              <p className="text-[#9ca0d2] text-sm leading-relaxed mt-1 max-w-2xl comfort">
-                Organized our first internal 24-Hour Code Sprint, launched our Discord server, and sent teams to national hackathons, winning our first inter-college trophy.
-              </p>
-            </div>
-
-            {/* Timeline Item 3 */}
-            <div className="relative group">
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-[#060607] group-hover:scale-125 transition-transform" />
-              <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                2025 • PRODUCT INCUBATION
-              </span>
-              <h3 className="monu text-lg sm:text-xl text-white font-bold mt-2">CampusMate & DevArena Launch</h3>
-              <p className="text-[#9ca0d2] text-sm leading-relaxed mt-1 max-w-2xl comfort">
-                Formally established the XD Product Incubator. Student teams engineered and deployed CampusMate for college resource sharing and DevArena for online multiplayer DSA duels.
-              </p>
-            </div>
-
-            {/* Timeline Item 4 */}
-            <div className="relative group">
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-amber-500 border-4 border-[#060607] group-hover:scale-125 transition-transform" />
-              <span className="text-xs font-mono font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
-                2026 & BEYOND • HORIZONS
-              </span>
-              <h3 className="monu text-lg sm:text-xl text-white font-bold mt-2">Autonomous AI & Web3 Expansion</h3>
-              <p className="text-[#9ca0d2] text-sm leading-relaxed mt-1 max-w-2xl comfort">
-                Pioneering cutting-edge research tracks in generative AI copilot agents, decentralized IPFS media protocols, and student fellowship grants.
-              </p>
-            </div>
+              return (
+                <div key={idx} className="relative group">
+                  <div className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full ${item.color === "purple" ? "bg-purple-500" : item.color === "emerald" ? "bg-emerald-500" : item.color === "amber" ? "bg-amber-500" : "bg-blue-500"} border-4 border-[#060607] group-hover:scale-125 transition-transform`} />
+                  <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-md border ${dotColor}`}>
+                    {item.year}
+                  </span>
+                  <h3 className="monu text-lg sm:text-xl text-white font-bold mt-2">{item.title}</h3>
+                  <p className="text-[#9ca0d2] text-sm leading-relaxed mt-1 max-w-2xl comfort">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
         {/* Tech Guilds Section */}
-        <section className="mx-5 sm:mx-10 md:mx-20 mb-24">
-          <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <div className="max-w-2xl mb-8">
-              <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full mb-3" />
-              <h2 className="monu text-2xl sm:text-3xl text-white font-bold">Tech Guilds & Domains</h2>
-              <p className="text-sm text-[#9ca0d2] mt-1 comfort">The core engineering tracks our mentors teach and build in.</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="p-5 rounded-xl bg-white/[0.04] border border-white/10">
-                <h4 className="monu text-white text-base mb-2 flex items-center gap-2">
-                  <span className="text-blue-400">⚡</span> Full-Stack Web
-                </h4>
-                <p className="text-xs text-[#9ca0d2] mb-3 comfort">Scalable, responsive web applications with rich user interfaces.</p>
-                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-blue-300">
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">Next.js</span>
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">React</span>
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">Node.js</span>
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">TailwindCSS</span>
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">Docker</span>
-                </div>
+        {about.guilds && (
+          <section className="mx-5 sm:mx-10 md:mx-20 mb-24">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+              <div className="max-w-2xl mb-8">
+                <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-green-500 rounded-full mb-3" />
+                <h2 className="monu text-2xl sm:text-3xl text-white font-bold">{about.guilds.heading}</h2>
+                <p className="text-sm text-[#9ca0d2] mt-1 comfort">{about.guilds.subtitle}</p>
               </div>
 
-              <div className="p-5 rounded-xl bg-white/[0.04] border border-white/10">
-                <h4 className="monu text-white text-base mb-2 flex items-center gap-2">
-                  <span className="text-purple-400">🧠</span> AI & Machine Learning
-                </h4>
-                <p className="text-xs text-[#9ca0d2] mb-3 comfort">Applied NLP, ATS resume parsers, copilot agents, and LLMs.</p>
-                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-purple-300">
-                  <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Python</span>
-                  <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">FastAPI</span>
-                  <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">LangChain</span>
-                  <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">OpenAI</span>
-                  <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">PyTorch</span>
-                </div>
-              </div>
-
-              <div className="p-5 rounded-xl bg-white/[0.04] border border-white/10">
-                <h4 className="monu text-white text-base mb-2 flex items-center gap-2">
-                  <span className="text-emerald-400">🌐</span> Web3 & Systems
-                </h4>
-                <p className="text-xs text-[#9ca0d2] mb-3 comfort">Decentralized contracts, peer-to-peer storage, and IoT beacons.</p>
-                <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-emerald-300">
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Solidity</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Polygon</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">IPFS</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">ESP32</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">C++</span>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {about.guilds.items.map((guild, idx) => (
+                  <div key={idx} className="p-5 rounded-xl bg-white/[0.04] border border-white/10">
+                    <h4 className="monu text-white text-base mb-2 flex items-center gap-2">
+                      <span>{guild.icon}</span> {guild.title}
+                    </h4>
+                    <p className="text-xs text-[#9ca0d2] mb-3 comfort">{guild.description}</p>
+                    <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-blue-300">
+                      {guild.tags.map((tag) => (
+                        <span key={tag} className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Interactive FAQ Accordion Section */}
         <section className="mx-5 sm:mx-10 md:mx-20 mb-28">
@@ -430,7 +304,7 @@ export default function About() {
           </div>
 
           <div className="mt-10 space-y-4 max-w-4xl">
-            {FAQS.map((faq) => {
+            {about.faqs.map((faq) => {
               const isOpen = openFaq === faq.id;
               return (
                 <div
@@ -489,20 +363,22 @@ export default function About() {
           </div>
 
           {/* Quick Help Card */}
-          <div className="mt-8 p-5 rounded-2xl bg-white/[0.02] border border-white/10 max-w-4xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-xl">💬</span>
-              <p className="text-xs sm:text-sm text-gray-300 comfort">
-                Have a different question? Visit us in <span className="text-white font-bold">Lab 304</span> or drop us a message.
-              </p>
+          {about.quickHelp && (
+            <div className="mt-8 p-5 rounded-2xl bg-white/[0.02] border border-white/10 max-w-4xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">💬</span>
+                <p className="text-xs sm:text-sm text-gray-300 comfort">
+                  {about.quickHelp.text} <span className="text-white font-bold">{about.quickHelp.room}</span> or drop us a message.
+                </p>
+              </div>
+              <Link href={about.quickHelp.actionHref}>
+                <a className="monu text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1.5 whitespace-nowrap hover:underline">
+                  <span>{about.quickHelp.actionText}</span>
+                  <span>→</span>
+                </a>
+              </Link>
             </div>
-            <Link href="/contact">
-              <a className="monu text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1.5 whitespace-nowrap hover:underline">
-                <span>Contact Page</span>
-                <span>→</span>
-              </a>
-            </Link>
-          </div>
+          )}
         </section>
 
         {/* Call to Action Banner */}
@@ -516,21 +392,20 @@ export default function About() {
                 Ready to Join the Movement?
               </span>
               <h2 className="monu text-2xl sm:text-3xl text-white mt-2 mb-4">
-                Become a Member of XD Code Club
+                {about.cta.heading}
               </h2>
               <p className="text-[#9ca0d2] text-sm sm:text-base comfort leading-relaxed mb-8">
-                Whether you just wrote your first "Hello World" or you're deploying distributed microservices,
-                there is a seat for you at our table. Learn, collaborate, and build with us.
+                {about.cta.description}
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center items-center">
                 <a
-                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
+                  href={forms.membershipRegistration}
                   target="_blank"
                   rel="noreferrer"
                   className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-8 py-3 monu text-sm shadow-xl shadow-purple-600/40"
                 >
-                  Join XD Code Club
+                  {about.cta.primaryButtonText}
                 </a>
 
                 <Link href="/projects">
@@ -549,56 +424,39 @@ export default function About() {
             <Link href="/">
               <a className="flex items-center mb-4 sm:mb-0">
                 <img
-                  src="/xdcodeclub-logo2.png"
+                  src={club.logo}
                   className="h-10 mr-3 cursor-pointer"
-                  alt="XD Logo"
+                  alt={club.logoAlt}
                 />
                 <span className="text-white font-extrabold monu text-xl">
-                  XD<span className="text-gray-400 font-extrabold monu"> Code Club, SRCEM</span>
+                  {footer.brandText}<span className="text-gray-400 font-extrabold monu">{footer.brandSubText}</span>
                 </span>
               </a>
             </Link>
             <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-300 sm:mb-0 comfort">
-              <li>
-                <a
-                  href="https://www.linkedin.com/company/xd-code-club/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://discord.gg/vVh32R6t"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mr-4 hover:underline md:mr-6"
-                >
-                  Discord
-                </a>
-              </li>
-              <li>
-                <Link href="/projects">
-                  <a className="mr-4 hover:underline md:mr-6">Projects</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/rules">
-                  <a className="mr-4 hover:underline md:mr-6">Rules</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <a className="hover:underline">Contact</a>
-                </Link>
-              </li>
+              {footer.links.map((link, idx) => (
+                <li key={idx}>
+                  {link.isExternal ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mr-4 hover:underline md:mr-6"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>
+                      <a className="mr-4 hover:underline md:mr-6">{link.label}</a>
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
           <hr className="my-6 border-gray-800 sm:mx-auto" />
           <span className="block text-sm text-gray-400 comfort sm:text-center">
-            © XD Code Club 2026, SRCEM. All Rights Reserved.
+            {footer.copyright}
           </span>
         </footer>
       </main>

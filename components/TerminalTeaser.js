@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-
-const INITIAL_LOGS = [
-  { type: "cmd", text: "xd --status" },
-  { type: "res", text: "> Connecting to SRCEM Lab 304 Node... Connected (4ms)" },
-  { type: "res", text: "> Active Pods: DevArena, CampusMate, CogniScan" },
-  { type: "res", text: "> Mesh: 250+ student developers online" },
-  { type: "success", text: "> Ready to ship. Join the guild!" },
-];
+import siteContent from "../data/siteContent";
 
 export default function TerminalTeaser() {
-  const [logs, setLogs] = useState(INITIAL_LOGS);
+  const { terminal, forms } = siteContent;
+
+  const [logs, setLogs] = useState([
+    { type: "cmd", text: "xd --status" },
+    ...terminal.statusLines.slice(0, -1).map((text) => ({ type: "res", text })),
+    { type: "success", text: terminal.statusLines[terminal.statusLines.length - 1] },
+  ]);
   const [inputVal, setInputVal] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -22,36 +21,28 @@ export default function TerminalTeaser() {
       return;
     } else if (cleanCmd === "xd --status") {
       newLogs.push(
-        { type: "res", text: "> Connecting to SRCEM Lab 304 Node... Connected (4ms)" },
-        { type: "res", text: "> Active Pods: DevArena, CampusMate, CogniScan" },
-        { type: "success", text: "> Ready to ship. Join the guild!" }
+        ...terminal.statusLines.slice(0, -1).map((text) => ({ type: "res", text })),
+        { type: "success", text: terminal.statusLines[terminal.statusLines.length - 1] }
       );
     } else if (cleanCmd === "xd --projects") {
       newLogs.push(
-        { type: "res", text: "> [1] DevArena - Real-time DSA Duel Arena (Next.js + Docker)" },
-        { type: "res", text: "> [2] SRCEM CampusMate - Academic ERP for 1.2k+ students" },
-        { type: "res", text: "> [3] CogniScan AI - ATS Resume & Mock Interview Copilot" },
-        { type: "success", text: "> View all at /projects" }
+        ...terminal.projectLines.slice(0, -1).map((text) => ({ type: "res", text })),
+        { type: "success", text: terminal.projectLines[terminal.projectLines.length - 1] }
       );
     } else if (cleanCmd === "xd --join") {
       newLogs.push(
         { type: "res", text: "> Opening official membership registration form..." },
-        { type: "success", text: "> Link: https://forms.gle/8q4ZmyutMPViSBaY8" }
+        { type: "success", text: `> Link: ${forms.membershipRegistration}` }
       );
     } else if (cleanCmd === "xd --team") {
-      newLogs.push(
-        { type: "res", text: "> Vice President: Amit Mahor" },
-        { type: "res", text: "> Technical Head: Jeevesh Para" },
-        { type: "res", text: "> Core Council: Tanish, Suraj, Rahul, Saniya, Ananya, Yash" }
-      );
+      newLogs.push(...terminal.teamLines.map((text) => ({ type: "res", text })));
     } else if (cleanCmd === "help" || cleanCmd === "xd --help") {
       newLogs.push(
         { type: "res", text: "Available commands:" },
-        { type: "res", text: "  xd --status   : Query live club nodes" },
-        { type: "res", text: "  xd --projects : List flagship student software" },
-        { type: "res", text: "  xd --join     : Registration link" },
-        { type: "res", text: "  xd --team     : Council leadership" },
-        { type: "res", text: "  clear         : Clear screen" }
+        ...terminal.helpCommands.map((c) => ({
+          type: "res",
+          text: `  ${c.cmd.padEnd(14)}: ${c.desc}`,
+        }))
       );
     } else {
       newLogs.push({
