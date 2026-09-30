@@ -54,7 +54,7 @@
 ## Membership & Joining Information
 - **Eligibility**: Open to all enrolled engineering students across all years and departments at SRCEM (CSE, IT, Mechanical, Civil, Electrical, Management).
 - **Fees**: 100% Free. No membership or registration dues are charged.
-- **Application Portal**: https://forms.gle/vjS6yrbdoLu89uHA9
+- **Application Portal**: https://forms.gle/8q4ZmyutMPViSBaY8
 - **Prerequisites**: No prior coding experience required; foundational tracks and beginner bootcamps are provided for freshmen.
 
 ## Canonical Web Navigation

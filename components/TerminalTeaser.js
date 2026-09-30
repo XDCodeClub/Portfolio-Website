@@ -36,7 +36,7 @@ export default function TerminalTeaser() {
     } else if (cleanCmd === "xd --join") {
       newLogs.push(
         { type: "res", text: "> Opening official membership registration form..." },
-        { type: "success", text: "> Link: https://forms.gle/vjS6yrbdoLu89uHA9" }
+        { type: "success", text: "> Link: https://forms.gle/8q4ZmyutMPViSBaY8" }
       );
     } else if (cleanCmd === "xd --team") {
       newLogs.push(

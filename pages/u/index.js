@@ -239,7 +239,7 @@ export default function MembersDirectory() {
                 </Link>
 
                 <a
-                  href="https://forms.gle/vjS6yrbdoLu89uHA9"
+                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
                   target="_blank"
                   rel="noreferrer"
                   className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-8 sm:px-10 py-2 monu text-sm shadow-lg shadow-purple-600/30"
@@ -251,7 +251,7 @@ export default function MembersDirectory() {
               {/* Mobile Hamburger Toggle */}
               <div className="flex items-center gap-3 md:hidden">
                 <a
-                  href="https://forms.gle/vjS6yrbdoLu89uHA9"
+                  href="https://forms.gle/8q4ZmyutMPViSBaY8"
                   target="_blank"
                   rel="noreferrer"
                   className="btn btn-primary btn-gradient px-4 py-1.5 text-xs monu rounded-lg shadow-md"
@@ -533,7 +533,7 @@ export default function MembersDirectory() {
               </p>
 
               <a
-                href="https://forms.gle/vjS6yrbdoLu89uHA9"
+                href="https://forms.gle/8q4ZmyutMPViSBaY8"
                 target="_blank"
                 rel="noreferrer"
                 className="ripple -z-1 enter-app-btn btn btn-primary btn-gradient font-monument px-10 py-3 monu text-sm shadow-xl shadow-purple-600/40"
